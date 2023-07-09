@@ -213,3 +213,12 @@ Now we have 4 pods running.
 2 applications ( banana-app and apple-app)
 
 ![all pods](./images/running-pods.png)
+
+We should also have  4 services running
+
+```
+kubectl get svc -n ingress-dele
+```
+
+![service all](./images/servicesall.png)
+
