@@ -284,3 +284,11 @@ ubuntu@ip-172-31-95-188:~$ kubectl get ingress -n ingress-dele
 NAME              CLASS    HOSTS                                                                    ADDRESS                                                                  PORTS   AGE
 example-ingress   <none>   a9f759dcd1bbd4a7586a7200075135ae-518961434.us-east-1.elb.amazonaws.com   a9f759dcd1bbd4a7586a7200075135ae-518961434.us-east-1.elb.amazonaws.com   80      11m
 ```
+
+
+You can now view your load balancer in action by typing the different paths
+
+a9f759dcd1bbd4a7586a7200075135ae-518961434.us-east-1.elb.amazonaws.com/apple
+
+a9f759dcd1bbd4a7586a7200075135ae-518961434.us-east-1.elb.amazonaws.com/banana
+
