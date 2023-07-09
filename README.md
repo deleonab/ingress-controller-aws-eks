@@ -94,7 +94,7 @@ sudo ./get_helm.sh
 Check installation
 ```
 helm version
-``
+```
 
 ![helm version](./images/helminstall.png)
 
