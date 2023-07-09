@@ -105,3 +105,16 @@ kubectl create namespace ingress-dele
 ```
 ![createnamespaceingressdele](./images/createnamespace.png)
 
+Let's install the Nginx Ingree Controller using helm
+```
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx 
+helm install my-release-ingress ingress-nginx/ingress-nginx \
+--namespace ingress-dele \
+--set controller.replicaCount=2 \
+--set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
+--set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux 
+
+```
+
+![install nginx ingress](./images/ingressinstall0.png)
+![install nginx ingress](./images/ingressinstall.png)
