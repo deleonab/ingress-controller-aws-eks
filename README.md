@@ -98,3 +98,10 @@ helm version
 
 ![helm version](./images/helminstall.png)
 
+Before we install ingress, let's create a namespace for this
+
+```
+kubectl create namespace ingress-dele
+```
+![createnamespaceingressdele](./images/createnamespace.png)
+
