@@ -77,4 +77,24 @@ eksctl create cluster --name demo-eks --region us-east-1 --nodegroup-name my-nod
  ```
  ![kubectl get nodes](./images/kubectlgetnodesdefault.png)
 
- 
+
+We shall be using help to deploy our Nginx ingress controller.
+
+INSTALL HELM
+
+```
+sudo apt update
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+
+chmod +x get_helm.sh
+
+sudo ./get_helm.sh
+```
+Check installation
+```
+helm version
+``
+
+![helm version](./images/helminstall.png)
+
