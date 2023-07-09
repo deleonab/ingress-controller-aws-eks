@@ -138,3 +138,78 @@ It has created 2 nginx cingress controller pods, a replicaset of 2 pods and 2 se
 The first service is of type LoadBalancer
 
 The second service is of type clusterIP
+
+We can view the created LoadBalancer in our AWS Console
+EC2 > Load Balancers
+
+![load balancers](./images/loadbalancer.png)
+
+Next, I will create 2 pods in ingress-dele namespace (apple and banana), each with it's own service
+
+Here is our apple mnifest file apple.yaml
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apple-app
+  labels:
+    apps: apple
+spec:
+  containers:
+  - name: apple-app
+    image: hashicorp/http-echo
+    args:
+    - "-text=apple"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apple-service
+spec:
+  selector:
+    app: apple
+  ports:
+    - port: 5678
+```
+
+Here is the manifest file for banana.yaml
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: banana-app
+  labels:
+    apps: banana
+spec:
+  containers:
+  - name: banana-app
+    image: hashicorp/http-echo
+    args:
+    - "-text=banana"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: banana-service
+spec:
+  selector:
+    app: banana
+  ports:
+    - port: 5678
+```
+
+
+https://raw.githubusercontent.com/deleonab/ingress-controller-aws-eks/main/EKS-Ingress-Controller/apple.yaml
+
+kubectl create -f https://raw.githubusercontent.com/deleonab/ingress-controller-aws-eks/main/EKS-Ingress-Controller/banana.yaml -n ingress-dele
+
+![pods created](./images/podscreated.png)
+
+Now we have 4 pods running. 
+2 ingress controller pods
+2 applications ( banana-app and apple-app)
+
+![all pods](./images/)
