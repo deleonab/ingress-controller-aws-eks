@@ -212,4 +212,4 @@ Now we have 4 pods running.
 2 ingress controller pods
 2 applications ( banana-app and apple-app)
 
-![all pods](./images/)
+![all pods](./images/running-pods.png)
