@@ -118,3 +118,11 @@ helm install my-release-ingress ingress-nginx/ingress-nginx \
 
 ![install nginx ingress](./images/ingressinstall0.png)
 ![install nginx ingress](./images/ingressinstall.png)
+
+Verify if release installed
+
+``` 
+helm ls --namespace ingress-dele 
+```
+![ingress installed](./images/ingressinstalled.png)
+
