@@ -78,7 +78,7 @@ eksctl create cluster --name demo-eks --region us-east-1 --nodegroup-name my-nod
  ![kubectl get nodes](./images/kubectlgetnodesdefault.png)
 
 
-We shall be using help to deploy our Nginx ingress controller.
+We shall be using helm to deploy our Nginx ingress controller.
 
 INSTALL HELM
 
@@ -252,6 +252,8 @@ spec:
                 port:
                   number: 5678
 ```
+
+
 
 ```
 ubuntu@ip-172-31-95-188:~$ kubectl create -f https://raw.githubusercontent.com/deleonab/ingress-controller-aws-eks/main/EKS-Ingress-Controller/example-ingress.yaml -n ingress-dele
