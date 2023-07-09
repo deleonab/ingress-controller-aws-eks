@@ -222,3 +222,63 @@ kubectl get svc -n ingress-dele
 
 ![service all](./images/servicesall.png)
 
+Now we shall deploy our ingress resource
+
+Our ingress resource manifest file is example-ingress.yaml
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: a9f759dcd1bbd4a7586a7200075135ae-518961434.us-east-1.elb.amazonaws.com
+      http:
+        paths:
+          - path: /apple
+            pathType: Prefix
+            backend:
+              service:
+                name: apple-service
+                port:
+                  number: 5678
+          - path: /banana
+            pathType: Prefix
+            backend:
+              service:
+                name: banana-service
+                port:
+                  number: 5678
+```
+
+```
+ubuntu@ip-172-31-95-188:~$ kubectl create -f https://raw.githubusercontent.com/deleonab/ingress-controller-aws-eks/main/EKS-Ingress-Controller/example-ingress.yaml -n ingress-dele
+ingress.networking.k8s.io/example-ingress created
+```
+
+```
+ubuntu@ip-172-31-95-188:~$ kubectl get all -n ingress-dele
+NAME                                                               READY   STATUS    RESTARTS   AGE
+pod/apple-app                                                      1/1     Running   0          123m
+pod/banana-app                                                     1/1     Running   0          121m
+pod/my-release-ingress-ingress-nginx-controller-55cf8588b4-ncctk   1/1     Running   0          4h18m
+pod/my-release-ingress-ingress-nginx-controller-55cf8588b4-rrwxv   1/1     Running   0          4h18m
+
+NAME                                                            TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)                      AGE
+service/apple-service                                           ClusterIP      10.100.136.211   <none>                                                                   5678/TCP
+
+NAME                                                          READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/my-release-ingress-ingress-nginx-controller   2/2     2            2           4h18m
+
+NAME                                                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/my-release-ingress-ingress-nginx-controller-55cf8588b4   2         2         2       4h18m
+ubuntu@ip-172-31-95-188:~$ sudo systemctl config nginx
+Unknown command verb config.
+ubuntu@ip-172-31-95-188:~$ service nginx status
+Unit nginx.service could not be found.
+ubuntu@ip-172-31-95-188:~$ kubectl get ingress -n ingress-dele
+NAME              CLASS    HOSTS                                                                    ADDRESS                                                                  PORTS   AGE
+example-ingress   <none>   a9f759dcd1bbd4a7586a7200075135ae-518961434.us-east-1.elb.amazonaws.com   a9f759dcd1bbd4a7586a7200075135ae-518961434.us-east-1.elb.amazonaws.com   80      11m
+```
