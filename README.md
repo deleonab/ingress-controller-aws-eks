@@ -126,3 +126,15 @@ helm ls --namespace ingress-dele
 ```
 ![ingress installed](./images/ingressinstalled.png)
 
+Next, let's check what resources are now in our namespace
+
+```
+kubectl get all --namespace ingress-dele
+```
+
+![ingress deployed resources](./images/ingressdeployed.png)
+
+It has created 2 nginx cingress controller pods, a replicaset of 2 pods and 2 services
+The first service is of type LoadBalancer
+
+The second service is of type clusterIP
